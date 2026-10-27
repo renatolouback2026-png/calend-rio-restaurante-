@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#1e293b">
+<title>Dias Trabalhados - Novembro 2026</title>
+
+<style>
+:root {
+  --texto: #1e293b;
+  --cinza: #64748b;
+  --borda: #e2e8f0;
+  --fundo: #f0f4f8;
+  --principal: #4f46e5;
+  --principal-escuro: #4338ca;
+  --principal-claro: #818cf8;
+  --marcado: #ecfdf5;
+  --marcado-borda: #34d399;
+  --marcado-texto: #047857;
+  --acento: #f59e0b;
+  --sombra: 0 10px 40px -10px rgba(79, 70, 229, 0.25);
+  --transicao: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 20px 14px;
+  background:
+    radial-gradient(circle at 10% 10%, rgba(129, 140, 248, 0.15), transparent 40%),
+    radial-gradient(circle at 90% 90%, rgba(245, 158, 11, 0.1), transparent 40%),
+    var(--fundo);
+  color: var(--texto);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 760px;
+  margin: auto;
+  background: white;
+  border: 1px solid var(--borda);
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: var(--sombra);
+  animation: entrada 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes entrada {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+header {
+  position: relative;
+  padding: 30px 24px;
+  background: linear-gradient(135deg, var(--principal) 0%, var(--principal-escuro) 50%, #7c3aed 100%);
+  background-size: 200% 200%;
+  color: white;
+  overflow: hidden;
+  animation: gradiente 8s ease infinite;
+}
+
+@keyframes gradiente {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+header::after {
+  content: "";
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+
+header::before {
+  content: "";
+  position: absolute;
+  bottom: -80px;
+  left: -40px;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  pointer-events: none;
+}
+
+header p {
+  margin: 8px 0 0;
+  color: #e0e7ff;
+  position: relative;
+}
+
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #c7d2fe;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(23px, 5vw, 34px);
+  letter-spacing: -0.5px;
+  position: relative;
+}
+
+main {
+  padding: 24px;
+}
+
+.resumo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.estatistica {
+  position: relative;
+  padding: 16px 18px;
+  border: 1px solid var(--borda);
+  border-radius: 14px;
+  background: linear-gradient(135deg, #fafbff, #f1f5ff);
+  overflow: hidden;
+  transition: transform var(--transicao), box-shadow var(--transicao);
+}
+
+.estatistica:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px -12px rgba(79, 70, 229, 0.25);
+}
+
+.estatistica::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, var(--principal-claro), var(--principal));
+  border-radius: 4px;
+}
+
+.estatistica:nth-child(2)::before {
+  background: linear-gradient(180deg, var(--acento), #ef4444);
+}
+
+.estatistica span {
+  display: block;
+  color: var(--cinza);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.estatistica strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--principal-escuro);
+  transition: transform var(--transicao);
+}
+
+.estatistica:nth-child(2) strong {
+  color: #b45309;
+}
+
+.estatistica strong.bump {
+  animation: bump 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes bump {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+
+.calendario {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.dia-semana {
+  padding: 8px 0;
+  text-align: center;
+  color: var(--cinza);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.dia {
+  position: relative;
+  min-height: 86px;
+  padding: 10px 4px;
+  border: 1.5px solid var(--borda);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: white;
+  transition: all var(--transicao);
+}
+
+.dia:hover {
+  border-color: var(--principal-claro);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px -8px rgba(79, 70, 229, 0.2);
+}
+
+.dia.marcado {
+  background: linear-gradient(160deg, #ecfdf5, #d1fae5);
+  border-color: var(--marcado-borda);
+  animation: marcar 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes marcar {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+.dia.marcado .numero {
+  color: var(--marcado-texto);
+}
+
+.dia.marcado::after {
+  content: "✓";
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  font-size: 12px;
+  color: var(--marcado-borda);
+  font-weight: bold;
+  animation: apareceCheck 0.35s ease both;
+}
+
+@keyframes apareceCheck {
+  from { opacity: 0; transform: scale(0); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.numero {
+  font-weight: 700;
+  font-size: 15px;
+  transition: color var(--transicao);
+}
+
+.dia input {
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  accent-color: var(--principal);
+  cursor: pointer;
+  transition: transform var(--transicao);
+}
+
+.dia input:hover {
+  transform: scale(1.15);
+}
+
+.dia input:focus-visible {
+  outline: 3px solid var(--principal-claro);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.dia label {
+  color: var(--cinza);
+  font-size: 10px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.dia.marcado label {
+  color: var(--marcado-texto);
+  font-weight: 700;
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+button {
+  position: relative;
+  padding: 12px 18px;
+  border: 1.5px solid #cbd5df;
+  border-radius: 10px;
+  background: white;
+  color: var(--texto);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all var(--transicao);
+}
+
+button:hover {
+  border-color: var(--principal-claro);
+  color: var(--principal-escuro);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px -8px rgba(79, 70, 229, 0.3);
+}
+
+button:active {
+  transform: translateY(0) scale(0.97);
+}
+
+button.principal {
+  background: linear-gradient(135deg, var(--principal), var(--principal-escuro));
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 8px 20px -8px rgba(79, 70, 229, 0.5);
+}
+
+button.principal:hover {
+  color: white;
+  box-shadow: 0 12px 24px -8px rgba(79, 70, 229, 0.6);
+}
+
+button.principal::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s;
+}
+
+button.principal:hover::after {
+  left: 100%;
+}
+
+.aviso {
+  margin-top: 18px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  color: #92400e;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+footer {
+  padding: 18px;
+  border-top: 1px solid var(--borda);
+  text-align: center;
+  color: var(--cinza);
+  font-size: 14px;
+  background: linear-gradient(180deg, white, #f8fafc);
+}
+
+footer strong {
+  background: linear-gradient(135deg, var(--principal), #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+}
+
+@media (max-width: 480px) {
+  body { padding: 10px 7px; }
+  header { padding: 24px 18px; }
+  main { padding: 16px 12px 20px; }
+  .calendario { gap: 5px; }
+  .dia { min-height: 74px; padding: 8px 2px; border-radius: 9px; }
+  .dia-semana { font-size: 10px; }
+  .dia label { font-size: 9px; }
+  .estatistica strong { font-size: 26px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  body { padding: 0; background: white; }
+  .app { width: 100%; border: none; box-shadow: none; animation: none; }
+  header { background: white; color: var(--texto); border-bottom: 2px solid var(--texto); animation: none; }
+  header p, .eyebrow { color: var(--cinza); }
+  header::before, header::after { display: none; }
+  .acoes, .aviso { display: none; }
+  .estatistica, .dia { box-shadow: none; }
+  .dia::after { display: none; }
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+  <header>
+    <p class="eyebrow">Controle mensal</p>
+    <h1>DIAS TRABALHADOS</h1>
+    <p>Novembro de 2026</p>
+  </header>
+
+  <main>
+    <section class="resumo" aria-label="Resumo">
+      <div class="estatistica">
+        <span>Dias trabalhados</span>
+        <strong id="total">0</strong>
+      </div>
+
+      <div class="estatistica">
+        <span>Dias restantes</span>
+        <strong id="restantes">30</strong>
+      </div>
+    </section>
+
+    <section id="calendario" class="calendario" aria-label="Calendário de novembro de 2026">
+      <div class="dia-semana">DOM</div>
+      <div class="dia-semana">SEG</div>
+      <div class="dia-semana">TER</div>
+      <div class="dia-semana">QUA</div>
+      <div class="dia-semana">QUI</div>
+      <div class="dia-semana">SEX</div>
+      <div class="dia-semana">SÁB</div>
+    </section>
+
+    <div class="acoes">
+      <button class="principal" id="imprimir">🖨️ Imprimir calendário</button>
+      <button id="limpar">🧹 Desmarcar todos</button>
+    </div>
+
+    <p class="aviso">
+      ✨ Marque os dias em que você trabalhou. Suas marcações ficam salvas neste navegador.
+    </p>
+  </main>
+
+  <footer>
+    Feito por <strong>Renato</strong>
+  </footer>
+
+</div>
+
+<script>
+const CHAVE = "diasTrabalhados_novembro_2026";
+
+const calendario = document.getElementById("calendario");
+const total = document.getElementById("total");
+const restantes = document.getElementById("restantes");
+
+let marcacoes = {};
+
+try {
+  marcacoes = JSON.parse(localStorage.getItem(CHAVE) || "{}");
+} catch (erro) {
+  marcacoes = {};
+}
+
+function animarValor(el) {
+  el.classList.remove("bump");
+  void el.offsetWidth; // força reflow para reiniciar a animação
+  el.classList.add("bump");
+}
+
+for (let dia = 1; dia <= 30; dia++) {
+  const caixa = document.createElement("div");
+  caixa.className = "dia";
+
+  const numero = document.createElement("span");
+  numero.className = "numero";
+  numero.textContent = dia;
+
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.id = "dia-" + dia;
+  checkbox.checked = Boolean(marcacoes[dia]);
+  checkbox.setAttribute("aria-label", "Marcar dia " + dia + " como trabalhado");
+
+  const label = document.createElement("label");
+  label.htmlFor = checkbox.id;
+  label.textContent = "Trabalhei";
+
+  if (checkbox.checked) {
+    caixa.classList.add("marcado");
+  }
+
+  checkbox.addEventListener("change", function () {
+    marcacoes[dia] = checkbox.checked;
+    caixa.classList.toggle("marcado", checkbox.checked);
+
+    try {
+      localStorage.setItem(CHAVE, JSON.stringify(marcacoes));
+    } catch (erro) {
+      console.warn("Não foi possível salvar as marcações.");
+    }
+
+    atualizarResumo();
+  });
+
+  caixa.appendChild(numero);
+  caixa.appendChild(checkbox);
+  caixa.appendChild(label);
+  calendario.appendChild(caixa);
+}
+
+function atualizarResumo() {
+  const quantidade = Object.values(marcacoes).filter(Boolean).length;
+  total.textContent = quantidade;
+  restantes.textContent = 30 - quantidade;
+  animarValor(total);
+  animarValor(restantes);
+}
+
+document.getElementById("limpar").addEventListener("click", function () {
+  const confirmar = confirm("Deseja desmarcar todos os dias trabalhados?");
+  if (!confirmar) return;
+
+  marcacoes = {};
+
+  try {
+    localStorage.removeItem(CHAVE);
+  } catch (erro) {}
+
+  document.querySelectorAll(".dia input[type='checkbox']").forEach(function (checkbox) {
+    checkbox.checked = false;
+    checkbox.closest(".dia").classList.remove("marcado");
+  });
+
+  atualizarResumo();
+});
+
+document.getElementById("imprimir").addEventListener("click", function () {
+  window.print();
+});
+
+atualizarResumo();
+</script>
+
+</body>
+</html>
